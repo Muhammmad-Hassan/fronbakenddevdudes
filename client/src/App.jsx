@@ -3,6 +3,7 @@ import ProductForm from './pages/ProductForm'
 import ProductShow from './pages/ProductShow'
 import { useEffect , useState } from 'react'
 import axios from "axios"
+import ProductDetails from './pages/ProductDetails'
 
 function App() {
   const data = [{
@@ -53,6 +54,7 @@ function App() {
   return (
     <>
     <ProductForm  fetchProducts={fetchProducts}/>
+    <ProductDetails/>
    
    
   { product.map((item, index) =>(
