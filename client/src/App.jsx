@@ -1,6 +1,8 @@
 import React from 'react'
 import ProductForm from './pages/ProductForm'
 import ProductShow from './pages/ProductShow'
+import { useEffect , useState } from 'react'
+import axios from "axios"
 
 function App() {
   const data = [{
@@ -25,13 +27,36 @@ function App() {
       productPrice : "$30"
   }]
 
+
+  const [product , setProduct]  = useState([])
+
+
+  const fetchProducts = async () => {
+    try {
+        const resp = await axios.get("http://127.0.0.1:5000/api/getproducts");
+        
+        setProduct(resp.data)
+    } catch (error) {
+        console.log( "resp err : " ,error.message)
+    }
+
+   
+  };
+ useEffect(()=>{
+  fetchProducts()
+    } , [])
+   
+
+
+
+
   return (
     <>
-    <ProductForm/>
+    <ProductForm  fetchProducts={fetchProducts}/>
    
    
-  { data.map((item, index) =>(
-       <ProductShow name = {item.productName} description = {item.productDescription} price = {item.productPrice} key={index}/>
+  { product.map((item, index) =>(
+       <ProductShow name = {item.productTitle} description = {item.productDescription} price = {item.productPrice} key={index}/>
     )
     )
   }

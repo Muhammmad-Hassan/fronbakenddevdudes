@@ -1,69 +1,90 @@
-import React, { useState } from 'react';
-import './ProductForm.css'; // Import the CSS file
+import React, { useState } from "react";
+import "./ProductForm.css"; // Import the CSS file
+import axios from "axios";
 
-function ProductForm() {
-    const [productTitle, setProductTitle] = useState("");
-    const [productPrice, setProductPrice] = useState("");
-    const [productDescription, setProductDescription] = useState("");
+function ProductForm({fetchProducts}) {
+  const [productTitle, setProductTitle] = useState("");
+  const [productPrice, setProductPrice] = useState("");
+  const [productDescription, setProductDescription] = useState("");
 
-    const handleTitleChange = (e) => {
-        const title = e.target.value;
-        setProductTitle(title);
-    };
+  const handleTitleChange = (e) => {
+    const title = e.target.value;
+    setProductTitle(title);
+  };
 
-    const handlePriceChange = (e) => {
-        const price = e.target.value;
-        setProductPrice(price);
-    };
+  const handlePriceChange = (e) => {
+    const price = e.target.value;
+    setProductPrice(price);
+  };
 
-    const handleDescriptionChange = (e) => {
-        const description = e.target.value;
-        setProductDescription(description);
-    };
+  const handleDescriptionChange = (e) => {
+    const description = e.target.value;
+    setProductDescription(description);
+  };
 
-    const handleSubmit = (e) => {
-        e.preventDefault(); // Prevent the default form submission
-        console.log("Product Title:", productTitle);
-        console.log("Product Price:", productPrice);
-        console.log("Product Description:", productDescription);
-    };
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+        const resp = await axios.post("http://127.0.0.1:5000/api/products", {
+            productTitle,
+            productPrice,
+            productDescription,
+          });
+        console.log(resp.status)
+          if(resp.status == "201"){
+              console.log("create success!")
+              fetchProducts()
+          }
+    } catch (error) {
+        console.log( "resp err : " ,error.message)
+    }
+   
+  };
 
-    return (
-        <>
-            <form className="form-container" onSubmit={handleSubmit}>
-                <label htmlFor="ProductTitle" className="form-label">Product Title: </label>
-                <input
-                    type="text"
-                    placeholder="Enter product name"
-                    id="ProductTitle"
-                    value={productTitle}
-                    onChange={handleTitleChange}
-                    className="form-input"
-                />
+  return (
+    <>
+      <form className="form-container" onSubmit={handleSubmit}>
+        <label htmlFor="ProductTitle" className="form-label">
+          Product Title:{" "}
+        </label>
+        <input
+          type="text"
+          placeholder="Enter product name"
+          id="ProductTitle"
+          value={productTitle}
+          onChange={handleTitleChange}
+          className="form-input"
+        />
 
-                <label htmlFor="ProductPrice" className="form-label">Product Price: </label>
-                <input
-                    type="text"
-                    placeholder="Enter product price"
-                    id="ProductPrice"
-                    value={productPrice}
-                    onChange={handlePriceChange}
-                    className="form-input"
-                />
+        <label htmlFor="ProductPrice" className="form-label">
+          Product Price:{" "}
+        </label>
+        <input
+          type="text"
+          placeholder="Enter product price"
+          id="ProductPrice"
+          value={productPrice}
+          onChange={handlePriceChange}
+          className="form-input"
+        />
 
-                <label htmlFor="ProductDescription" className="form-label">Product Description: </label>
-                <textarea
-                    placeholder="Enter product description"
-                    id="ProductDescription"
-                    value={productDescription}
-                    onChange={handleDescriptionChange}
-                    className="form-textarea"
-                />
+        <label htmlFor="ProductDescription" className="form-label">
+          Product Description:{" "}
+        </label>
+        <textarea
+          placeholder="Enter product description"
+          id="ProductDescription"
+          value={productDescription}
+          onChange={handleDescriptionChange}
+          className="form-textarea"
+        />
 
-                <button type="submit" className="form-button">Submit</button>
-            </form>
-        </>
-    );
+        <button type="submit" className="form-button">
+          Submit
+        </button>
+      </form>
+    </>
+  );
 }
 
 export default ProductForm;
