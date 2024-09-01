@@ -93,6 +93,7 @@ function ProductForm({fetchProducts}) {
           Submit
         </button>
       </form>
+      <img src="https://nodejs.org/static/images/logo.svg" alt="" />
     </>
   );
 }

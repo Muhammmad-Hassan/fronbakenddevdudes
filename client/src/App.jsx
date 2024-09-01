@@ -23,18 +23,6 @@ function App() {
 
   return (
     <>
-<<<<<<< HEAD
-      <ProductForm fetchProducts={fetchProducts} />
-
-      {product.map((item, index) => (
-        <ProductShow
-          name={item.productTitle}
-          description={item.productDescription}
-          price={item.productPrice}
-          key={index}
-        />
-      ))}
-=======
     <ProductForm  fetchProducts={fetchProducts}/>
    
    
@@ -43,7 +31,6 @@ function App() {
     )
     )
   }
->>>>>>> ff2048ac98cd9b7ee679b268222dfdf61b44cc81
     </>
   );
 }
