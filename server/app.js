@@ -16,8 +16,8 @@ app.use(cors({
     credentials: true
 }));
 
-app.get("/ ", (req, res) => {
-    res.send("Hello Khan");
+app.get("/", (req, res) => {
+    res.json("Hello Khan");
 })
 
 app.post('/api/products', async (req, res) => {
