@@ -1,6 +1,7 @@
 import React from "react";
 import ProductForm from "./pages/ProductForm";
 import ProductShow from "./pages/ProductShow";
+import ProductDetails from "./pages/ProductDetails";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
