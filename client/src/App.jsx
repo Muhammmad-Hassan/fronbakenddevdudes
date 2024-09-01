@@ -36,7 +36,7 @@ function App() {
    
    
   { product.map((item, index) =>(
-       <ProductShow name = {item.productTitle} description = {item.productDescription} price = {item.productPrice} key={index}/>
+       <ProductShow name = {item.productTitle} description = {item.productDescription} price = {item.productPrice} image={item.image} key={index}/>
     )
     )
   }

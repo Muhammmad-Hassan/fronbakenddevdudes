@@ -5,6 +5,7 @@ import axios from "axios";
 function ProductForm({fetchProducts}) {
   const [productTitle, setProductTitle] = useState("");
   const [productPrice, setProductPrice] = useState("");
+  const [image, setImage] = useState("")
   const [productDescription, setProductDescription] = useState("");
 
   const handleTitleChange = (e) => {
@@ -22,13 +23,21 @@ function ProductForm({fetchProducts}) {
     setProductDescription(description);
   };
 
+ const handleImageChange = (e) => {
+  const image = e.target.value;
+  setImage(image);
+
+ }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
         const resp = await axios.post("http://127.0.0.1:5000/api/products", {
             productTitle,
             productPrice,
+            image,
             productDescription,
+
           });
         console.log(resp.status)
           if(resp.status == "201"){
@@ -67,7 +76,8 @@ function ProductForm({fetchProducts}) {
           onChange={handlePriceChange}
           className="form-input"
         />
-
+        <label htmlFor="image">Image:</label>
+        <input type="text" placeholder="Enter the URL of the image" id="image"  onChange={handleImageChange}/>
         <label htmlFor="ProductDescription" className="form-label">
           Product Description:{" "}
         </label>
