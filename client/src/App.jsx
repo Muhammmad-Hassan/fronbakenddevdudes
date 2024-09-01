@@ -5,27 +5,7 @@ import { useEffect , useState } from 'react'
 import axios from "axios"
 
 function App() {
-  const data = [{
-    productName :  "shirt",
-     productDescription:  "Hello this is ",
-      productPrice : "$30"
-  },{
-    productName :  "shirt1",
-     productDescription:  "Hello this is ",
-      productPrice : "$30"
-  },{
-    productName :  "shirt2",
-     productDescription:  "Hello this is ",
-      productPrice : "$30"
-  },{
-    productName :  "shirt3",
-     productDescription:  "Hello this is ",
-      productPrice : "$30"
-  },{
-    productName :  "shirt4",
-     productDescription:  "Hello this is ",
-      productPrice : "$30"
-  }]
+ 
 
 
   const [product , setProduct]  = useState([])
