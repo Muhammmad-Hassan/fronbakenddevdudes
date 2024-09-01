@@ -10,10 +10,20 @@
   font-family: Arial, sans-serif;
 }
 
+.product-header {
+  display: flex;
+  align-items: center; /* Align items vertically centered */
+  justify-content: space-between; /* Space between title and image */
+  margin-bottom: 20px; /* Add some margin at the bottom */
+}
+
 .product-title {
   font-size: 24px;
   font-weight: bold;
-  margin-bottom: 10px;
+}
+
+.product-image {
+  margin-left: 20px; /* Add some space between title and image */
 }
 
 .product-description {
