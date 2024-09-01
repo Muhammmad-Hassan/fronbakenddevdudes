@@ -10,7 +10,7 @@ function App() {
 
   const fetchProducts = async () => {
     try {
-      const resp = await axios.get("http://127.0.0.1:5000/api/getproducts");
+      const resp = await axios.get("https://bacdkend-api.vercel.app/api/getproducts");
 
       setProduct(resp.data);
     } catch (error) {

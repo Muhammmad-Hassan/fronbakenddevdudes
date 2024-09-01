@@ -10,7 +10,7 @@ const port = 5000;
 // Middleware
 
 app.use(cors({
-    origin: [""],
+    origin: ["https://front-api-two.vercel.app/"],
     methods: ["POST", "GET"],
     credentials: true
 }));
