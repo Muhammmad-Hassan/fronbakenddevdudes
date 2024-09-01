@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const Product = require('./models/product'); 
+const Product = require('./models/product');
 require("./db/connection")
 const app = express();
 const port = 5000;
@@ -12,14 +12,18 @@ app.use(express.json());
 
 app.use(cors({
     origin: [""],
-    methods: ["POST" , "GET"],
+    methods: ["POST", "GET"],
     credentials: true
 }));
 
+app.get("/ ", (req, res) => {
+    res.send("Hello Khan");
+})
+
 app.post('/api/products', async (req, res) => {
-  console.log(req.body)
+    console.log(req.body)
     const { productTitle, productPrice, productDescription } = req.body;
-    
+
 
     try {
         const newProduct = new Product({
@@ -39,13 +43,13 @@ app.post('/api/products', async (req, res) => {
 
 
 app.get('/api/getproducts', async (req, res) => {
-  try {
-      const products = await Product.find(); 
-      res.status(200).json(products); 
-  } catch (error) {
-      console.error('Error fetching products:', error.message);
-      res.status(500).json({ message: 'Failed to fetch products', error: error.message });
-  }
+    try {
+        const products = await Product.find();
+        res.status(200).json(products);
+    } catch (error) {
+        console.error('Error fetching products:', error.message);
+        res.status(500).json({ message: 'Failed to fetch products', error: error.message });
+    }
 });
 
 app.listen(port, () => {
