@@ -32,7 +32,7 @@ function ProductForm({fetchProducts}) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-        const resp = await axios.post("http://127.0.0.1:5000/api/products", {
+        const resp = await axios.post("https://bacdkend-api.vercel.app/api/products", {
             productTitle,
             productPrice,
             image,
