@@ -8,13 +8,13 @@ const app = express();
 const port = 5000;
 
 // Middleware
-app.use(express.json());
 
 app.use(cors({
     origin: [""],
     methods: ["POST", "GET"],
     credentials: true
 }));
+app.use(express.json());
 
 app.get("/", (req, res) => {
     res.json("Hello Khan");
