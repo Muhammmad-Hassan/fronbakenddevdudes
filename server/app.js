@@ -3,14 +3,17 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const Product = require('./models/product');
+require('dotenv').config();
+
 require("./db/connection")
+
 const app = express();
 const port = 5000;
 
 // Middleware
 
 app.use(cors({
-    origin: ["https://front-api-two.vercel.app"],
+    origin: [process.env.FRONT_URL],
     methods: ["POST", "GET"],
     credentials: true
 }));
