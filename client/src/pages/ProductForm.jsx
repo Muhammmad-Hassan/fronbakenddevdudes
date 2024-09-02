@@ -13,6 +13,8 @@ function ProductForm({fetchProducts}) {
     setProductTitle(title);
   };
 
+  
+
   const handlePriceChange = (e) => {
     const price = e.target.value;
     setProductPrice(price);
@@ -32,7 +34,7 @@ function ProductForm({fetchProducts}) {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-        const resp = await axios.post("https://bacdkend-api.vercel.app/api/products", {
+        const resp = await axios.post(`${import.meta.env.VITE_API_URL}/products`, {
             productTitle,
             productPrice,
             image,
@@ -93,7 +95,7 @@ function ProductForm({fetchProducts}) {
           Submit
         </button>
       </form>
-      <img src="https://nodejs.org/static/images/logo.svg" alt="" />
+      <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99fhttps://images.unsplash.com/photo-1565699297446-2d8e2a004a5b" alt="" />
     </>
   );
 }
