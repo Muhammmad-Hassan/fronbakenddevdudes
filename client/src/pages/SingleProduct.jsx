@@ -1,10 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import './ProductDetails.css';
+import { useParams, useNavigate } from 'react-router-dom';
+import './SingleProduct.css';
 
-const ProductDetails = () => {
+const SingleProduct = () => {
+  const { productId } = useParams();
   const navigate = useNavigate();
   
+  
+     // Assuming the product data is static in this example.
+  // In a real application, you might fetch this from a server or context.
   const products = [
     {
       id: 1,
@@ -63,42 +67,44 @@ const ProductDetails = () => {
       image: "https://www.transparentpng.com/thumb/t-shirt/JcvzGC-orange-t-shirt-image.png",
     },
   ];
+ 
 
-  const handleProductClick = (productId) => {
-    navigate(`/SingleProduct/${productId}`);
-  };
+  const product = products.find(item => item.id.toString() === productId);
+
+  if (!product) {
+    navigate('/ProductDetails');
+    return null;
+  }
 
   return (
-    <div className="product-details">
-      {/* Hero Section */}
-      <section className="hero-section">
-        <img 
-          src="https://t3.ftcdn.net/jpg/07/05/62/96/240_F_705629683_9g3iGCmIZr0r3kE1SXr9S3pdlvJsiDnR.jpg" 
-          className="hero-image" 
-          alt="Hero" 
-        />
-      </section>
-
-      {/* Product Catalog */}
-      <section className="product-catalog">
-        <h1>PRODUCTS</h1>
-        <div className="product-grid">
-          {products.map((product) => (
-            <div 
-              key={product.id} 
-              className="product-card" 
-              onClick={() => handleProductClick(product.id)}
-            >
-              <img src={product.image} alt={product.name} className="product-image" />
-              <h3 className="product-name">{product.name}</h3>
-              <p className="product-description">{product.description}</p>
-              <p className="product-price">{product.price}</p>
-            </div>
-          ))}
+    <div className="single-product">
+      <div className="product-images">
+        <img src={product.image} alt={product.name} className="main-image" />
+        <div className="small-images">
+          <img src={product.image} alt={product.name} className="small-image" />
+          <img src={product.image} alt={product.name} className="small-image" />
+          <img src={product.image} alt={product.name} className="small-image" />
         </div>
-      </section>
+      </div>
+      <div className="product-info">
+        <h1>{product.name}</h1>
+        <p>{product.description}</p>
+        <p className="product-price">{product.price}</p>
+        <div className="product-colors">
+          <p>Color:</p>
+          <div className="color-options">
+            <div className="color-option" style={{ backgroundColor: '#F2AB5C' }}></div>
+            <div className="color-option" style={{ backgroundColor: 'black' }}></div>
+            <div className="color-option" style={{ backgroundColor: '#263F54' }}></div>
+          </div>
+        </div>
+        <div className="product-buttons">
+          <button className="buy-now">Buy Now</button>
+          <button className="add-to-wishlist">Add to basket</button>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default ProductDetails;
+export default SingleProduct;
