@@ -4,6 +4,7 @@ const cors = require('cors');
 const productRoutes = require('./routes/productRoutes');
 require('dotenv').config();
 require("./config/db")
+const mongoose = require("mongoose")
 
 const app = express();
 
@@ -25,7 +26,7 @@ app.get('/api/checkdb', async (req, res) => {
         const isConnected = status === 1;
         res.json({ connected: isConnected });
     } catch (error) {
-        res.status(500).json({ error: "DB check failed" });
+        res.status(500).json({ error: "DB check failed"  });
     }
 });
 
