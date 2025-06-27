@@ -4,7 +4,6 @@ const cors = require('cors');
 const productRoutes = require('./routes/productRoutes');
 require('dotenv').config();
 require("./config/db")
-const { getAllProducts } = require("./controllers/productController")
 
 const app = express();
 
@@ -20,11 +19,19 @@ app.use(express.json());
 app.get('/api/test', (req, res) => {
     res.send('Deployed version is working ✅');
 });
+app.get('/api/checkdb', async (req, res) => {
+    try {
+        const status = await mongoose.connection.readyState;
+        const isConnected = status === 1;
+        res.json({ connected: isConnected });
+    } catch (error) {
+        res.status(500).json({ error: "DB check failed" });
+    }
+});
 
-app.get("/api/products/getproducts", getAllProducts)
 
 
-// app.use("/api/products", productRoutes)
+app.use("/api/products", productRoutes)
 
 module.exports = app;
 
