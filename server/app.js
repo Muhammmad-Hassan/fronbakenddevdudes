@@ -24,7 +24,7 @@ app.get('/api/test', (req, res) => {
 app.get("/api/products/getproducts", getAllProducts)
 
 
-app.use("/api/products", productRoutes)
+// app.use("/api/products", productRoutes)
 
 module.exports = app;
 
