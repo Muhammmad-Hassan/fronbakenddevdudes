@@ -7,6 +7,7 @@ const ProductDetails = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 const baseUrlLocal = "http://localhost:5000/api"
+console.log("url = " , import.meta.env.VITE_BAKEND_URL)
   const getProducts = async () => {
     try {
       const response = await axios.get(`${import.meta.env.VITE_BAKEND_URL}/products/getproducts`);
