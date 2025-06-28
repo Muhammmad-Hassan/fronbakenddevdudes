@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductForm.css"; // Import the CSS file
 import axios from "axios";
 
@@ -12,7 +12,6 @@ function ProductForm({fetchProducts}) {
     const title = e.target.value;
     setProductTitle(title);
   };
-
   
 
   const handlePriceChange = (e) => {
@@ -30,6 +29,14 @@ function ProductForm({fetchProducts}) {
   setImage(image);
 
  }
+
+ useEffect(() => {
+  
+  console.log(import.meta.env.VITE_BAKEND_URL)
+
+   
+ }, [])
+ 
 const baseUrl = "https://bakend-p1wp.onrender.com/api"
 const baseUrlLocal = "http://localhost:5000/api"
   const handleSubmit = async (e) => {
