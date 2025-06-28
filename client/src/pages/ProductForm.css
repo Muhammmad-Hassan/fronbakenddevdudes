@@ -1,5 +1,11 @@
 /* ProductForm.css */
 
+.form-success {
+  color: green;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
 .form-container {
   max-width: 400px;
   margin: 0 auto;

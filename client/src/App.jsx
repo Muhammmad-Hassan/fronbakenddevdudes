@@ -3,6 +3,7 @@ import ProductForm from "./pages/ProductForm";
 import ProductShow from "./pages/ProductShow";
 import ProductDetails from "./pages/ProductDetails";
 import SingleProduct from "./pages/SingleProduct";
+import Navbar from "./components/Navbar";
 import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <Router>
+      <Navbar/>
       <Routes>
         <Route path="/ProductDetails" element={<ProductDetails />} />
         <Route path="/SingleProduct/:productId" element={<SingleProduct />} />

@@ -1,68 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './ProductDetails.css';
 
 const ProductDetails = () => {
   const navigate = useNavigate();
-  
-  const products = [
-    {
-      id: 1,
-      name: "Men's Essential Tee (Rust)",
-      description: "Soft and comfortable essential tee.",
-      price: "$30.00",
-      image: "https://www.transparentpng.com/thumb/t-shirt/JcvzGC-orange-t-shirt-image.png",
-    },
-    {
-      id: 2,
-      name: "Men's Essential Tee (Deep Forest)",
-      description: "Soft and comfortable essential tee.",
-      price: "$30.00",
-      image: "https://www.transparentpng.com/thumb/t-shirt/JcvzGC-orange-t-shirt-image.png",
-    },
-    {
-      id: 3,
-      name: "Men's Essential Tee (Stone)",
-      description: "Soft and comfortable essential tee.",
-      price: "$30.00",
-      image: "https://www.transparentpng.com/thumb/t-shirt/JcvzGC-orange-t-shirt-image.png",
-    },
-    {
-      id: 4,
-      name: "Men's Essential Tee (Charcoal)",
-      description: "Soft and comfortable essential tee.",
-      price: "$30.00",
-      image: "https://www.transparentpng.com/thumb/t-shirt/JcvzGC-orange-t-shirt-image.png",
-    },
-    {
-      id: 5,
-      name: "Men's Essential Tee (Washed Indigo)",
-      description: "Soft and comfortable essential tee.",
-      price: "$30.00",
-      image: "https://www.transparentpng.com/thumb/t-shirt/JcvzGC-orange-t-shirt-image.png",
-    },
-    {
-      id: 6,
-      name: "Men's Essential Tee (Black)",
-      description: "Soft and comfortable essential tee.",
-      price: "$30.00",
-      image: "https://www.transparentpng.com/thumb/t-shirt/JcvzGC-orange-t-shirt-image.png",
-    },
-    {
-      id: 7,
-      name: "Men's Essential Tee (Gray)",
-      description: "Soft and comfortable essential tee.",
-      price: "$30.00",
-      image: "https://www.transparentpng.com/thumb/t-shirt/JcvzGC-orange-t-shirt-image.png",
-    },
-    {
-      id: 8,
-      name: "Men's Essential Tee (Olive)",
-      description: "Soft and comfortable essential tee.",
-      price: "$30.00",
-      image: "https://www.transparentpng.com/thumb/t-shirt/JcvzGC-orange-t-shirt-image.png",
-    },
-  ];
+  const [products, setProducts] = useState([]);
+const baseUrlLocal = "http://localhost:5000/api"
+  const getProducts = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BAKEND_URL}/products/getproducts`);
+      console.log(response.data)
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching products:", error.message);
+      return [];
+    }
+  };
+
+  useEffect(() => {
+    const fetchAllProducts = async () => {
+      const data = await getProducts();
+      setProducts(data.data);
+    };
+
+    fetchAllProducts();
+  }, []);
 
   const handleProductClick = (productId) => {
     navigate(`/SingleProduct/${productId}`);
@@ -70,7 +33,6 @@ const ProductDetails = () => {
 
   return (
     <div className="product-details">
-      {/* Hero Section */}
       <section className="hero-section">
         <img 
           src="https://t3.ftcdn.net/jpg/07/05/62/96/240_F_705629683_9g3iGCmIZr0r3kE1SXr9S3pdlvJsiDnR.jpg" 
@@ -79,20 +41,19 @@ const ProductDetails = () => {
         />
       </section>
 
-      {/* Product Catalog */}
       <section className="product-catalog">
         <h1>PRODUCTS</h1>
         <div className="product-grid">
           {products.map((product) => (
             <div 
-              key={product.id} 
+              key={product._id} 
               className="product-card" 
-              onClick={() => handleProductClick(product.id)}
+              onClick={() => handleProductClick(product._id)}
             >
-              <img src={product.image} alt={product.name} className="product-image" />
-              <h3 className="product-name">{product.name}</h3>
-              <p className="product-description">{product.description}</p>
-              <p className="product-price">{product.price}</p>
+              <img src={product.image} alt={product.productTitle} className="product-image" />
+              <h3 className="product-name">{product.productTitle}</h3>
+              <p className="product-description">{product.productDescription}</p>
+              <p className="product-price">{product.productPrice}</p>
             </div>
           ))}
         </div>
