@@ -30,12 +30,12 @@ function ProductForm({fetchProducts}) {
   setImage(image);
 
  }
-const baseUrl = "https://bacdkend-api.vercel.app/api/products"
-const baseUrlLocal = "http://localhost:5000/api/products"
+const baseUrl = "https://bakend-p1wp.onrender.com/api"
+const baseUrlLocal = "http://localhost:5000/api"
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-        const resp = await axios.post(`${baseUrl}/addproduct`, {
+        const resp = await axios.post(`${import.meta.env.VITE_BAKEND_URL}/products/addproduct`, {
             productTitle,
             productPrice,
             image,
