@@ -7,13 +7,16 @@ const Product = require("../models/productModel")
 exports.addProduct = async (req, res) => {
     console.log("Add product controller")
     console.log(req.body)
-    const { productTitle, productPrice, productDescription } = req.body;
+    const { productTitle, productPrice, productDescription, image } = req.body;
+    
+
 
 
     try {
         const newProduct = new Product({
             productTitle,
             productPrice,
+            image,
             productDescription,
         });
 
