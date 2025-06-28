@@ -13,9 +13,7 @@ function App() {
 
   const fetchProducts = async () => {
     try {
-      const resp = await axios.get(
-        "https://bacdkend-api.vercel.app/api/getproducts"
-      );
+      const resp = await axios.get(import.meta.env.VITE_BAKEND_URL);
       setProduct(resp.data);
     } catch (error) {
       console.log("resp err : ", error.message);
